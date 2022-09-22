@@ -55,6 +55,10 @@ namespace  SimpleFactory
             {
                 return new ConcreteProductB();
             }
+            else
+            {
+                return nullptr;
+            }
         }
     };
 

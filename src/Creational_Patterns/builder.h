@@ -81,6 +81,7 @@ namespace Builder
     {
     public:
         Builder(){}
+        virtual ~Builder(){}
         virtual void Reset() = 0;
         virtual void BuildStepA() = 0;
         virtual void BuildStepB() = 0;
