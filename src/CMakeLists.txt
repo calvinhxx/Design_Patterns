@@ -11,10 +11,6 @@ cmake_minimum_required(VERSION 3.6)
 # set app name
 set(NAME App)
 
-# set output path
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/release)
-
 # add source_files macro function
 macro(source_group_by_dir source_files)
         set(sgbd_cur_dir ${CMAKE_CURRENT_SOURCE_DIR}/)
