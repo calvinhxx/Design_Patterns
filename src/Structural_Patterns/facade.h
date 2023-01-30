@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef FACADE_H
 #define FACADE_H
 
@@ -5,31 +6,31 @@
 
 namespace Facade {
 class Component {
-public:
+ public:
   Component() {}
   virtual void Work() = 0;
 };
 
 class Disk : public Component {
-public:
+ public:
   Disk() {}
   virtual void Work() { std::cout << "disk work" << std::endl; }
 };
 
 class CPU : public Component {
-public:
+ public:
   CPU() {}
   virtual void Work() { std::cout << "CPU work" << std::endl; }
 };
 
 class Memory : public Component {
-public:
+ public:
   Memory() {}
   virtual void Work() { std::cout << "Memory work" << std::endl; }
 };
 
 class System {
-public:
+ public:
   System() : disk_(new Disk), cpu_(new CPU), memory_(new Memory) {}
   void StartUp() {
     std::cout << "StartUp" << std::endl;
@@ -38,7 +39,7 @@ public:
     memory_->Work();
   }
 
-private:
+ private:
   Component *disk_;
   Component *cpu_;
   Component *memory_;
@@ -54,6 +55,6 @@ void Client() {
             << "Facade"
             << "***\n";
 }
-} // namespace Facade
+}  // namespace Facade
 
-#endif // FACADE_H
+#endif  // FACADE_H

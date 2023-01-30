@@ -7,36 +7,38 @@
 #include <string>
 
 namespace FlyWeight {
-class IFlight {
-public:
+class AbstractFlight {
+ public:
   virtual void Info() = 0;
 };
 
-class Flight : public IFlight {
-public:
+class Flight : public AbstractFlight {
+ public:
   explicit Flight(const std::string &flight_num) : flight_num_(flight_num) {}
-  void Info() override { std::cout << "航班号:" << flight_num_ << std::endl; }
+  void Info() override {
+    std::cout << "flight-num:" << flight_num_ << std::endl;
+  }
 
-protected:
+ protected:
   std::string flight_num_;
 };
 
 class FlightSearchFactory {
-public:
+ public:
   static Flight *SearchFlight(const std::string &num) {
     auto result = map_.find(num);
     if (result != map_.end()) {
-      std::cout << "已存在" << std::endl;
+      std::cout << "Already exists" << std::endl;
       return result->second;
     } else {
       Flight *flight = new Flight(num);
       map_.insert({num, flight});
-      std::cout << "新添加" << std::endl;
+      std::cout << "New add" << std::endl;
       return flight;
     }
   }
 
-private:
+ private:
   static std::map<std::string, Flight *> map_;
 };
 
@@ -58,6 +60,6 @@ void Client() {
             << "FlyWeight"
             << "***\n";
 }
-} // namespace FlyWeight
+}  // namespace FlyWeight
 
-#endif // SRC_STRUCTURAL_PATTERNS_FLYWEIGHT_H_
+#endif  // SRC_STRUCTURAL_PATTERNS_FLYWEIGHT_H_

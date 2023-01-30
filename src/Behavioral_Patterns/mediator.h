@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef MEDIATOR_H
 #define MEDIATOR_H
 
@@ -9,47 +10,47 @@ namespace Mediator {
 class Mediator;
 
 class Component {
-public:
-  Component(Mediator *mediator) : mediator_(mediator) {}
+ public:
+  explicit Component(Mediator *mediator) : mediator_(mediator) {}
   virtual void OnEvent(std::string event) = 0;
 
-protected:
+ protected:
   Mediator *mediator_;
 };
 
 class Mediator {
-public:
+ public:
   Mediator() {}
   virtual void Notify(Component *sender, std::string event) = 0;
 };
 
 class Button : public Component {
-public:
-  Button(Mediator *mediator) : Component(mediator) {}
+ public:
+  explicit Button(Mediator *mediator) : Component(mediator) {}
   void OnEvent(std::string event) override { mediator_->Notify(this, event); }
 };
 
 class Dialog : public Component {
-public:
-  Dialog(Mediator *mediator) : Component(mediator) {}
+ public:
+  explicit Dialog(Mediator *mediator) : Component(mediator) {}
   void OnEvent(std::string event) override { mediator_->Notify(this, event); }
 };
 
 class CheckBox : public Component {
-public:
-  CheckBox(Mediator *mediator) : Component(mediator) {}
+ public:
+  explicit CheckBox(Mediator *mediator) : Component(mediator) {}
   void OnEvent(std::string event) override { mediator_->Notify(this, event); }
 };
 
 class ConcreteMediator : public Mediator {
-public:
+ public:
   ConcreteMediator() {}
   void Append(Component *component) { vec_.push_back(component); }
-  virtual void Notify(Component *sender, std::string event) override {
+  void Notify(Component *sender, std::string event) override {
     std::cout << "sender = " << sender << " event = " << event << std::endl;
   }
 
-private:
+ private:
   std::vector<Component *> vec_;
 };
 
@@ -71,6 +72,6 @@ void Client() {
             << "Mediator"
             << "***" << std::endl;
 }
-} // namespace Mediator
+}  // namespace Mediator
 
-#endif // MEDIATOR_H
+#endif  // MEDIATOR_H

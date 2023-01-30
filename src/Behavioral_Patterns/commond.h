@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef COMMOND_H
 #define COMMOND_H
 
@@ -5,39 +6,39 @@
 
 namespace Commond {
 class Light {
-public:
-  Light(){};
+ public:
+  Light() {}
   void On() { std::cout << "light is on!!!" << std::endl; }
   void Off() { std::cout << "light is off!!!" << std::endl; }
 };
 
 class Commond {
-public:
-  Commond(){};
+ public:
+  Commond() {}
   virtual void Execute() = 0;
 };
 
 class LightOnCommond : public Commond {
-public:
-  LightOnCommond(Light light) : light_(light) {}
+ public:
+  explicit LightOnCommond(Light light) : light_(light) {}
   void Execute() override { light_.On(); }
 
-private:
+ private:
   Light light_;
 };
 
 class LightOffCommond : public Commond {
-public:
-  LightOffCommond(Light light) : light_(light) {}
+ public:
+  explicit LightOffCommond(Light light) : light_(light) {}
   void Execute() override { light_.Off(); }
 
-private:
+ private:
   Light light_;
 };
 
 class Invoker {
-public:
-  Invoker(){};
+ public:
+  Invoker() {}
   void Submit(Commond *cmd) { cmd->Execute(); }
 };
 
@@ -55,6 +56,6 @@ void Client() {
             << "Commond"
             << "***" << std::endl;
 }
-}; // namespace Commond
+};  // namespace Commond
 
-#endif // COMMOND_H
+#endif  // COMMOND_H

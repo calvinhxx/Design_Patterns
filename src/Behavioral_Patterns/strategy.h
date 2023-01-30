@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef STRATEGY_H
 #define STRATEGY_H
 
@@ -6,30 +7,30 @@
 namespace Strategy {
 
 class AbstractStrategy {
-public:
+ public:
   AbstractStrategy() {}
   virtual void function() = 0;
 };
 
 class ConcreteStrategy1 : public AbstractStrategy {
-public:
+ public:
   ConcreteStrategy1() {}
   void function() override { std::cout << "ConcreteStrategy1" << std::endl; }
 };
 
 class ConcreteStrategy2 : public AbstractStrategy {
-public:
+ public:
   ConcreteStrategy2() {}
   void function() override { std::cout << "ConcreteStrategy2" << std::endl; }
 };
 
 class Context {
-public:
+ public:
   Context() {}
   void SetStrategy(AbstractStrategy *strate) { strategy_ = strate; }
   void ExecuteStrategy() { strategy_->function(); }
 
-private:
+ private:
   AbstractStrategy *strategy_;
 };
 
@@ -48,6 +49,6 @@ void Client() {
             << "Strategy"
             << "***" << std::endl;
 }
-}; // namespace Strategy
+};  // namespace Strategy
 
-#endif // STRATEGY_H
+#endif  // STRATEGY_H

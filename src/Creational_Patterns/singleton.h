@@ -1,20 +1,15 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
 #include <cassert>
 #include <iostream>
 
-///
-/// 一个类只有一个实例, 提供一个全局的访问节点。
-///
-
 namespace Singleton {
 ///
-/// 1.参考cppreferencenote The rule of three/five/zero
-/// c98三法则:析构、拷贝构造、拷贝赋值
-/// c11五法则:析构、拷贝构造、移动构造、拷贝赋值、移动赋值
+/// 1.ref cppreferencenote The rule of three/five/zero
 ///
-/*  2.参考CppCoreGuidelines 5+1
+/*  2.ref CppCoreGuidelines 5+1
 These functions control the lifecycle of objects: creation, copy, move, and
 destruction. Define constructors to guarantee and simplify initialization of
 classes.
@@ -31,7 +26,7 @@ the default can be suppressed.
 */
 
 class Singleton {
-public:
+ public:
   static Singleton &Instance() {
     static Singleton instance;
     return instance;
@@ -41,26 +36,27 @@ public:
   Singleton &operator=(const Singleton &) = delete;
   Singleton &operator=(Singleton &&) = delete;
 
-private:
+ private:
   Singleton() = default;
   ~Singleton() = default;
 };
 
 ///
-/// 模板版本
+/// temp version
 ///
-template <typename T> class SingletonTemp {
-public:
+template <typename T>
+class SingletonTemp {
+ public:
   static T &Instance() {
     static T instance;
     return instance;
   }
-  SingletonTemp(const T &) = delete;
-  SingletonTemp(T &&) = delete;
+  explicit SingletonTemp(const T &) = delete;
+  explicit SingletonTemp(T &&) = delete;
   T &operator=(const T &) = delete;
   T &operator=(T &&) = delete;
 
-private:
+ private:
   SingletonTemp() = default;
   ~SingletonTemp() = default;
 };
@@ -70,23 +66,23 @@ class A {};
 void Client() {
   std::cout << "***"
             << "TestSingleton"
-            << "***\n";
+            << "***" << std::endl;
   auto &a = Singleton::Instance();
   auto &b = Singleton::Instance();
   assert(&a == &b);
   std::cout << "***"
             << "TestSingleton  Suc"
-            << "***\n";
+            << "***" << std::endl;
   auto &c = SingletonTemp<A>::Instance();
   auto &d = SingletonTemp<A>::Instance();
   assert(&c == &d);
   std::cout << "***"
             << "SingletonTemp  Suc"
-            << "***\n";
+            << "***" << std::endl;
   std::cout << "***"
             << "TestSingleton"
-            << "***\n";
+            << "***" << std::endl;
 }
-} // namespace Singleton
+}  // namespace Singleton
 
-#endif // SINGLETON_H
+#endif  // SINGLETON_H

@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef MEMENTO_H
 #define MEMENTO_H
 
@@ -6,23 +7,23 @@
 #include <unordered_map>
 
 ///
-/// Also known as: Snapshot(快照模式)
+/// Also known as: Snapshot
 ///
 
 namespace Memento {
 class Memento {
-public:
-  Memento(int value) : value_(value) {}
+ public:
+  explicit Memento(int value) : value_(value) {}
 
   int Value() const { return value_; }
 
-private:
+ private:
   int value_;
 };
 
 class Originator {
-public:
-  Originator(int value) : value_(value) {}
+ public:
+  explicit Originator(int value) : value_(value) {}
 
   void SetValue(int value) { value_ = value; }
 
@@ -32,19 +33,19 @@ public:
 
   Memento CreateMemento() { return Memento(value_); }
 
-private:
+ private:
   int value_;
 };
 
 class Caretaker {
-public:
+ public:
   Caretaker() {}
   void SaveState(const std::string &str, const Memento &memento) {
     mementos_.try_emplace(str, memento);
   }
   const Memento &TakeState(const std::string &str) { return mementos_.at(str); }
 
-private:
+ private:
   std::unordered_map<std::string, const Memento &> mementos_;
 };
 
@@ -70,6 +71,6 @@ void Client() {
             << "Memento"
             << "***" << std::endl;
 }
-} // namespace Memento
+}  // namespace Memento
 
-#endif // MEMENTO_H
+#endif  // MEMENTO_H

@@ -1,42 +1,35 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef STATE_H
 #define STATE_H
 
 #include <iostream>
 
-///
-/// 涉及概念：
-/// 1.有向图
-/// 2.finite-state machine(有限状态机)
-/// 状态机State、Transition 对应有向图Node、Link
-/// 状态模式是借鉴了状态机State、Transition概念。
-///
-
 namespace State {
 class AbstractState {
-public:
+ public:
   AbstractState() {}
   virtual void Enter() = 0;
   virtual void Exit() = 0;
 };
 
 class AbstractTransition {
-public:
+ public:
   AbstractTransition(AbstractState *state) : state_(state) {}
   virtual void StateTransfer(AbstractState *state) = 0;
 
-protected:
+ protected:
   AbstractState *state_;
 };
 
 class ConcreteState : public AbstractState {
-public:
+ public:
   ConcreteState() {}
   void Enter() override { std::cout << this << "Enter" << std::endl; }
   void Exit() override { std::cout << this << "Exit" << std::endl; }
 };
 
 class ConcreteTransition : public AbstractTransition {
-public:
+ public:
   ConcreteTransition(AbstractState *state) : AbstractTransition(state) {}
   void StateTransfer(AbstractState *state) {
     state_->Exit();
@@ -61,6 +54,6 @@ void Client() {
             << "State"
             << "***" << std::endl;
 }
-}; // namespace State
+};  // namespace State
 
-#endif // STATE_H
+#endif  // STATE_H

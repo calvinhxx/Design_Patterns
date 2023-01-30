@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
@@ -8,16 +9,16 @@
 namespace Observer {
 class AbstractSubject;
 class AbstractObserver {
-public:
-  AbstractObserver(AbstractSubject *subject) : subject_(subject) {}
+ public:
+  explicit AbstractObserver(AbstractSubject *subject) : subject_(subject) {}
   virtual void update() = 0;
 
-protected:
+ protected:
   AbstractSubject *subject_;
 };
 
 class AbstractSubject {
-public:
+ public:
   AbstractSubject() {}
   virtual void RegisterObserver(AbstractObserver *observer) = 0;
   virtual void RemoveObserver(AbstractObserver *observer) = 0;
@@ -26,20 +27,21 @@ public:
   void SaveValue(const std::string &date) { data_ = date; }
   const std::string &TakeValue() { return data_; }
 
-protected:
+ protected:
   std::string data_;
 };
 
 class ConcreteObserver : public AbstractObserver {
-public:
-  ConcreteObserver(AbstractSubject *subject) : AbstractObserver(subject) {}
+ public:
+  explicit ConcreteObserver(AbstractSubject *subject)
+      : AbstractObserver(subject) {}
   void update() override {
     std::cout << this << " " << subject_->TakeValue() << std::endl;
   }
 };
 
 class ConcreteSubject : public AbstractSubject {
-public:
+ public:
   ConcreteSubject() {}
   void RegisterObserver(AbstractObserver *observer) override {
     observers_.push_back(observer);
@@ -53,7 +55,7 @@ public:
     }
   }
 
-private:
+ private:
   std::list<AbstractObserver *> observers_;
 };
 
@@ -72,6 +74,6 @@ void Client() {
             << "Observer"
             << "***" << std::endl;
 }
-}; // namespace Observer
+};  // namespace Observer
 
-#endif // OBSERVER_H
+#endif  // OBSERVER_H

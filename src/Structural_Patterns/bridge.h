@@ -1,43 +1,40 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef BRIDGE_H
 #define BRIDGE_H
 
 #include <iostream>
 
-///
-/// 将m*n个类->m+n个类
-///
-
 namespace Bridge {
 class Computertype {
-public:
+ public:
   Computertype() {}
   virtual void Feature() = 0;
 };
 
 class DesktopComputertype : public Computertype {
-public:
+ public:
   DesktopComputertype() {}
   virtual void Feature() { std::cout << "powerful desktop\n"; }
 };
 
 class LaptopComputertype : public Computertype {
-public:
+ public:
   LaptopComputertype() {}
   virtual void Feature() { std::cout << "portable laptop\n"; }
 };
 
 class AbstractComputer {
-public:
+ public:
   AbstractComputer() {}
   void SetType(Computertype *type) { computertype_ = type; }
   virtual void Work() = 0;
 
-protected:
+ protected:
   Computertype *computertype_;
 };
 
 class LenovoComputer : public AbstractComputer {
-public:
+ public:
   LenovoComputer() {}
   virtual void Work() {
     std::cout << "LenovoComputer\n";
@@ -46,7 +43,7 @@ public:
 };
 
 class DellComputer : public AbstractComputer {
-public:
+ public:
   DellComputer() {}
   virtual void Work() {
     std::cout << "DellComputer\n";
@@ -70,6 +67,6 @@ void Client() {
             << "TestBridge"
             << "***\n";
 }
-} // namespace Bridge
+}  // namespace Bridge
 
-#endif // BRIDGE_H
+#endif  // BRIDGE_H

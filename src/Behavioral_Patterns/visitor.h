@@ -1,22 +1,26 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef VISITOR_H
 #define VISITOR_H
 
 #include <iostream>
 #include <list>
 
+///
+/// like Bank Operations
+///
 namespace Visitor {
 class ConcreteElementA;
 class ConcreteElementB;
 
-class AbstractVisitor { // 访客
-public:
+class AbstractVisitor {  // Visitor
+ public:
   AbstractVisitor() {}
   virtual void visit(ConcreteElementA *element) = 0;
   virtual void visit(ConcreteElementB *element) = 0;
 };
 
-class ConcreteVisitorA : public AbstractVisitor { // 存钱
-public:
+class ConcreteVisitorA : public AbstractVisitor {  // save money
+ public:
   ConcreteVisitorA() {}
   void visit(ConcreteElementA *element) override {
     std::cout << "ConcreteVisitorA " << this << " visit " << element
@@ -27,8 +31,8 @@ public:
               << " ConcreteElementB" << std::endl;
   }
 };
-class ConcreteVisitorB : public AbstractVisitor { // 取钱
-public:
+class ConcreteVisitorB : public AbstractVisitor {  // withdraw money
+ public:
   ConcreteVisitorB() {}
   void visit(ConcreteElementA *element) override {
     std::cout << "ConcreteVisitorB " << this << " visit " << element
@@ -40,8 +44,8 @@ public:
   }
 };
 
-class ConcreteVisitorC : public AbstractVisitor { // 存钱+取钱
-public:
+class ConcreteVisitorC : public AbstractVisitor {  // save with withdraw money
+ public:
   ConcreteVisitorC() {}
   void visit(ConcreteElementA *element) override {
     std::cout << "ConcreteVisitorC " << this << " visit " << element
@@ -53,14 +57,14 @@ public:
   }
 };
 
-class AbstractElement { // 银行业务
-public:
+class AbstractElement {  // Bank Operations
+ public:
   AbstractElement() {}
   virtual void Accept(AbstractVisitor *visit) = 0;
 };
 
-class ConcreteElementA : public AbstractElement { // 取钱业务
-public:
+class ConcreteElementA : public AbstractElement {  // save Operations
+ public:
   ConcreteElementA() {}
   void Accept(AbstractVisitor *visit) override {
     std::cout << "ConcreteElementA"
@@ -69,8 +73,8 @@ public:
   }
 };
 
-class ConcreteElementB : public AbstractElement { // 存钱业务
-public:
+class ConcreteElementB : public AbstractElement {  // withdraw Operations
+ public:
   ConcreteElementB() {}
   void Accept(AbstractVisitor *visit) override {
     std::cout << "ConcreteElementB"
@@ -79,8 +83,8 @@ public:
   }
 };
 
-class ObjectStructure { // 银行
-public:
+class ObjectStructure {  // Bank
+ public:
   ObjectStructure() {}
   void Append(AbstractElement *element) { elements_.emplace_back(element); }
   void Remove(AbstractElement *element) { elements_.remove(element); }
@@ -90,7 +94,7 @@ public:
     }
   }
 
-private:
+ private:
   std::list<AbstractElement *> elements_;
 };
 void Client() {
@@ -112,6 +116,6 @@ void Client() {
             << "Visitor"
             << "***" << std::endl;
 }
-}; // namespace Visitor
+};  // namespace Visitor
 
-#endif // VISITOR_H
+#endif  // VISITOR_H

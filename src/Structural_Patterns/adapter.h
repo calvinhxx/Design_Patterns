@@ -1,47 +1,46 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef ADAPTER_H
 #define ADAPTER_H
 
-#include <iostream>
 #include <math.h>
 
+#include <iostream>
+
 namespace Adapter {
-///
-/// "方钉与圆孔"
-///
 class RoundPeg {
-public:
-  RoundPeg(int radius = 0) : radius_(radius) {}
+ public:
+  explicit RoundPeg(int radius = 0) : radius_(radius) {}
   virtual int GetRadius() { return radius_; }
 
-private:
+ private:
   int radius_;
 };
 
 class RoundHole {
-public:
-  RoundHole(int radius = 0) : radius_(radius) {}
+ public:
+  explicit RoundHole(int radius = 0) : radius_(radius) {}
   bool Fits(RoundPeg *peg) { return radius_ >= peg->GetRadius(); }
 
-private:
+ private:
   int radius_;
 };
 
 class SquarePeg {
-public:
-  SquarePeg(int width = 0) : width_(width) {}
+ public:
+  explicit SquarePeg(int width = 0) : width_(width) {}
   int GetWidth() { return width_; }
 
-private:
+ private:
   int width_;
 };
 
 class SquarePegAdapter : public RoundPeg {
-public:
-  SquarePegAdapter(SquarePeg *peg)
+ public:
+  explicit SquarePegAdapter(SquarePeg *peg)
       : peg_(peg), RoundPeg(peg->GetWidth() * sqrt(2) / 2) {}
-  virtual int GetRadius() override { return peg_->GetWidth() * sqrt(2) / 2; }
+  int GetRadius() override { return peg_->GetWidth() * sqrt(2) / 2; }
 
-private:
+ private:
   SquarePeg *peg_;
 };
 
@@ -53,13 +52,15 @@ void Client() {
   auto roundhole = new RoundHole(5);
   assert(roundhole->Fits(roundpeg));
   auto squarepeg = new SquarePeg(5);
-  //        auto squarepeg = new SquarePeg(10);
   auto adapter = new SquarePegAdapter(squarepeg);
   assert(roundhole->Fits(adapter));
+  std::cout << "***"
+            << "TestAdapter  Suc"
+            << "***" << std::endl;
   std::cout << "***"
             << "TestAdapter"
             << "***\n";
 }
-} // namespace Adapter
+}  // namespace Adapter
 
-#endif // ADAPTER_H
+#endif  // ADAPTER_H

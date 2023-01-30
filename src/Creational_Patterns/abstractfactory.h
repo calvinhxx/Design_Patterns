@@ -1,62 +1,50 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef ABSTRACTFACTORY_H
 #define ABSTRACTFACTORY_H
 
 #include <iostream>
 
-///
-///
-///
-
 namespace AbstractFactory {
-///
-/// \brief The AbstractProductA class
-///
 class AbstractProductA {
-public:
+ public:
   AbstractProductA() {}
-  virtual void PrintAbstractA() = 0;
+  virtual void FuncA() = 0;
 };
 class ConcreteProductAStyle1 : public AbstractProductA {
-public:
+ public:
   ConcreteProductAStyle1() {}
-  virtual void PrintAbstractA() { std::cout << "ConcreteProductAStyle1\n"; }
+  virtual void FuncA() { std::cout << "ConcreteProductAStyle1" << std::endl; }
 };
 class ConcreteProductAStyle2 : public AbstractProductA {
-public:
+ public:
   ConcreteProductAStyle2() {}
-  virtual void PrintAbstractA() { std::cout << "ConcreteProductAStyle2\n"; }
+  virtual void FuncA() { std::cout << "ConcreteProductAStyle2" << std::endl; }
 };
 
-///
-/// \brief The AbstractProductB class
-///
 class AbstractProductB {
-public:
+ public:
   AbstractProductB() {}
-  virtual void PrintAbstractB() = 0;
+  virtual void FuncB() = 0;
 };
 class ConcreteProductBStyle1 : public AbstractProductB {
-public:
+ public:
   ConcreteProductBStyle1() {}
-  virtual void PrintAbstractB() { std::cout << "ConcreteProductBStyle1\n"; }
+  virtual void FuncB() { std::cout << "ConcreteProductBStyle1" << std::endl; }
 };
 class ConcreteProductBStyle2 : public AbstractProductB {
-public:
+ public:
   ConcreteProductBStyle2() {}
-  virtual void PrintAbstractB() { std::cout << "ConcreteProductBStyle2\n"; }
+  virtual void FuncB() { std::cout << "ConcreteProductBStyle2" << std::endl; }
 };
 
-///
-/// \brief The AbstractFactory class
-///
 class AbstractFactory {
-public:
+ public:
   AbstractFactory() {}
   virtual AbstractProductA *CreateProductA() = 0;
   virtual AbstractProductB *CreateProductB() = 0;
 };
 class ConcreteFactoryStyle1 : public AbstractFactory {
-public:
+ public:
   ConcreteFactoryStyle1() {}
   virtual AbstractProductA *CreateProductA() {
     return new ConcreteProductAStyle1();
@@ -66,7 +54,7 @@ public:
   }
 };
 class ConcreteFactoryStyle2 : public AbstractFactory {
-public:
+ public:
   ConcreteFactoryStyle2() {}
   virtual AbstractProductA *CreateProductA() {
     return new ConcreteProductAStyle2();
@@ -79,17 +67,17 @@ public:
 void Client() {
   std::cout << "***"
             << "TestAbstractFactory"
-            << "***\n";
+            << "***" << std::endl;
   auto style1Factory = new ConcreteFactoryStyle1;
-  style1Factory->CreateProductA()->PrintAbstractA();
-  style1Factory->CreateProductB()->PrintAbstractB();
+  style1Factory->CreateProductA()->FuncA();
+  style1Factory->CreateProductB()->FuncB();
   auto style2Factory = new ConcreteFactoryStyle2;
-  style2Factory->CreateProductA()->PrintAbstractA();
-  style2Factory->CreateProductB()->PrintAbstractB();
+  style2Factory->CreateProductA()->FuncA();
+  style2Factory->CreateProductB()->FuncB();
   std::cout << "***"
             << "TestAbstractFactory"
-            << "***\n";
+            << "***" << std::endl;
 }
-} // namespace AbstractFactory
+}  // namespace AbstractFactory
 
-#endif // ABSTRACTFACTORY_H
+#endif  // ABSTRACTFACTORY_H

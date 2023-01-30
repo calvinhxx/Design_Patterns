@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
@@ -5,33 +6,37 @@
 #include <vector>
 
 namespace Lterator {
-template <typename Item> class Iterator {
-public:
+template <typename Item>
+class Iterator {
+ public:
   Iterator() {}
   virtual Item Next() = 0;
   virtual bool HasNext() = 0;
 };
 
-template <typename Item> class Aggregate {
-public:
+template <typename Item>
+class Aggregate {
+ public:
   Aggregate() {}
   virtual Iterator<Item> *CreatorIterator() = 0;
 };
 
-template <typename Item> class ConcreteIterator : public Iterator<Item> {
-public:
+template <typename Item>
+class ConcreteIterator : public Iterator<Item> {
+ public:
   ConcreteIterator(std::vector<Item> vec) : vec_(vec) {}
   Item Next() override { return vec_.at(index_++); }
 
   bool HasNext() override { return index_ < vec_.size(); }
 
-private:
+ private:
   std::vector<Item> vec_;
   int index_ = 0;
 };
 
-template <typename Item> class ConcreteAggregate : public Aggregate<Item> {
-public:
+template <typename Item>
+class ConcreteAggregate : public Aggregate<Item> {
+ public:
   ConcreteAggregate() {}
   Iterator<Item> *CreatorIterator() override {
     return new ConcreteIterator<Item>(items_);
@@ -41,7 +46,7 @@ public:
 
   Item &operator[](int index) { return items_.at(index); }
 
-private:
+ private:
   std::vector<Item> items_;
 };
 
@@ -61,6 +66,6 @@ void Client() {
             << "Lterator"
             << "***" << std::endl;
 }
-}; // namespace Lterator
+};  // namespace Lterator
 
-#endif // ITERATOR_H
+#endif  // ITERATOR_H

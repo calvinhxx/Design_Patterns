@@ -1,3 +1,4 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef DECORATOR_H
 #define DECORATOR_H
 
@@ -5,34 +6,34 @@
 
 namespace Decorator {
 class Instrument {
-public:
+ public:
   virtual void Play() = 0;
 };
 
 class Piano : public Instrument {
-public:
-  virtual void Play() override { std::cout << "Piano" << std::endl; }
+ public:
+  void Play() override { std::cout << "Piano" << std::endl; }
 };
 
 class Guitar : public Instrument {
-public:
-  virtual void Play() override { std::cout << "Guitar" << std::endl; }
+ public:
+  void Play() override { std::cout << "Guitar" << std::endl; }
 };
 
 class InstrumentDecorator : public Instrument {
-public:
+ public:
   InstrumentDecorator(Instrument *instrument) : Instrument_(instrument) {}
-  virtual void Play() override { Instrument_->Play(); }
+  void Play() override { Instrument_->Play(); }
 
-protected:
+ protected:
   Instrument *Instrument_;
 };
 
 class BarBeCueInstrumentDecorator : public InstrumentDecorator {
-public:
-  BarBeCueInstrumentDecorator(Instrument *instrument)
+ public:
+  explicit BarBeCueInstrumentDecorator(Instrument *instrument)
       : InstrumentDecorator(instrument) {}
-  virtual void Play() override {
+  void Play() override {
     Barbecue();
     Instrument_->Play();
   }
@@ -55,6 +56,6 @@ void Client() {
             << "Decorator"
             << "***\n";
 }
-} // namespace Decorator
+}  // namespace Decorator
 
-#endif // DECORATOR_H
+#endif  // DECORATOR_H

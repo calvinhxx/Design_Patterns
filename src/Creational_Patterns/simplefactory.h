@@ -1,31 +1,28 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef SIMPLEFACTORY_H
 #define SIMPLEFACTORY_H
 
 #include <iostream>
 
-///
-/// 提供一个创建对象的工厂方法, 形参决定返回的对象。
-///
-
 namespace SimpleFactory {
 class AbstractProduct {
-public:
-  virtual void User() = 0;
+ public:
+  virtual void Func() = 0;
 };
 
 class ConcreteProductA : public AbstractProduct {
-public:
-  void User() override { std::cout << "ConcreteProductA\n"; };
+ public:
+  void Func() override { std::cout << "ConcreteProductA" << std::endl; };
 };
 
 class ConcreteProductB : public AbstractProduct {
-public:
-  void User() override { std::cout << "ConcreteProductB\n"; };
+ public:
+  void Func() override { std::cout << "ConcreteProductB" << std::endl; };
 };
 
 class SimpleFactory {
-public:
-  SimpleFactory(){};
+ public:
+  SimpleFactory() {}
   enum ProductType { A, B };
   AbstractProduct *CreateProduct(ProductType type) {
     if (type == A) {
@@ -41,15 +38,14 @@ public:
 void Client() {
   std::cout << "***"
             << "TestSimpleFactory"
-            << "***\n";
+            << "***" << std::endl;
   auto simpleFactory = new SimpleFactory();
-  simpleFactory->CreateProduct(SimpleFactory::ProductType::A)->User();
-  simpleFactory->CreateProduct(SimpleFactory::ProductType::B)->User();
+  simpleFactory->CreateProduct(SimpleFactory::ProductType::A)->Func();
+  simpleFactory->CreateProduct(SimpleFactory::ProductType::B)->Func();
   std::cout << "***"
             << "TestSimpleFactory"
-            << "***\n";
-  std::cout << "";
+            << "***" << std::endl;
 }
-} // namespace SimpleFactory
+}  // namespace SimpleFactory
 
-#endif // SIMPLEFACTORY_H
+#endif  // SIMPLEFACTORY_H

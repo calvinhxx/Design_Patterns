@@ -4,58 +4,54 @@
 
 #include <iostream>
 
-///
-/// 通过继承,子类实现工厂方法, 符合开闭方便扩展
-///
-
 namespace FactoryMethod {
 class AbstractProduct {
-public:
+ public:
   AbstractProduct() {}
-  virtual void Print() = 0;
+  virtual void Func() = 0;
 };
 
 class ConcreteProductA : public AbstractProduct {
-public:
+ public:
   ConcreteProductA() {}
-  void Print() override { std::cout << "ConcreteProductA\n"; }
+  void Func() override { std::cout << "ConcreteProductA" << std::endl; }
 };
 
 class ConcreteProductB : public AbstractProduct {
-public:
+ public:
   ConcreteProductB() {}
-  void Print() override { std::cout << "ConcreteProductB\n"; }
+  void Func() override { std::cout << "ConcreteProductB" << std::endl; }
 };
 
-class Factory {
-public:
-  Factory() {}
+class AbstractFactory {
+ public:
+  AbstractFactory() {}
   virtual AbstractProduct *CreateProduct() = 0;
 };
 
-class FactoryA : public Factory {
-public:
-  FactoryA() {}
+class ConcreteFactoryA : public AbstractFactory {
+ public:
+  ConcreteFactoryA() {}
   AbstractProduct *CreateProduct() override { return new ConcreteProductA; }
 };
 
-class FactoryB : public Factory {
-public:
-  FactoryB() {}
+class ConcreteFactoryB : public AbstractFactory {
+ public:
+  ConcreteFactoryB() {}
   AbstractProduct *CreateProduct() override { return new ConcreteProductB; }
 };
 
 void Client() {
   std::cout << "***"
             << "TestFactoryMethod"
-            << "***\n";
-  Factory *factoryA = new FactoryA;
-  factoryA->CreateProduct()->Print();
-  Factory *factoryB = new FactoryB;
-  factoryB->CreateProduct()->Print();
+            << "***" << std::endl;
+  AbstractFactory *factoryA = new ConcreteFactoryA;
+  factoryA->CreateProduct()->Func();
+  AbstractFactory *factoryB = new ConcreteFactoryB;
+  factoryB->CreateProduct()->Func();
   std::cout << "***"
             << "TestFactoryMethod"
-            << "***\n";
+            << "***" << std::endl;
 }
-} // namespace FactoryMethod
-#endif // SRC_CREATIONAL_PATTERNS_FACTORYMETHOD_H_
+}  // namespace FactoryMethod
+#endif  // SRC_CREATIONAL_PATTERNS_FACTORYMETHOD_H_

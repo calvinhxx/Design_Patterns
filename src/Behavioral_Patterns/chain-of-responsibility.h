@@ -1,37 +1,36 @@
+// # Copyright 2022 CalvinHxx. All rights reserved.
 #ifndef CHAINOFRESPONSIBILITY_H
 #define CHAINOFRESPONSIBILITY_H
 
 #include <iostream>
 #include <string>
 
-///
-/// 通过责任链上的对象都有机会处理请求，解耦发送者与接收者。
-///
-
 namespace ChainOfResponsibility {
 class Request {
-public:
+ public:
   Request(std::string name, std::string type) : name_(name), type_(type) {}
   std::string GetName() { return name_; }
   std::string GetType() { return type_; }
 
-private:
+ private:
   std::string name_;
   std::string type_;
 };
 
 class AbstractHandler {
-public:
-  AbstractHandler(AbstractHandler *successor) : successor_(successor) {}
+ public:
+  explicit AbstractHandler(AbstractHandler *successor)
+      : successor_(successor) {}
   virtual void HandlerRequest(Request request) = 0;
 
-protected:
+ protected:
   AbstractHandler *successor_;
 };
 
 class ConcreteHandler1 : public AbstractHandler {
-public:
-  ConcreteHandler1(AbstractHandler *successor) : AbstractHandler(successor) {}
+ public:
+  explicit ConcreteHandler1(AbstractHandler *successor)
+      : AbstractHandler(successor) {}
   void HandlerRequest(Request request) override {
     if (request.GetType() == "1") {
       std::cout << request.GetName() << " is handle by ConcreteHandler1"
@@ -45,8 +44,9 @@ public:
 };
 
 class ConcreteHandler2 : public AbstractHandler {
-public:
-  ConcreteHandler2(AbstractHandler *successor) : AbstractHandler(successor) {}
+ public:
+  explicit ConcreteHandler2(AbstractHandler *successor)
+      : AbstractHandler(successor) {}
   void HandlerRequest(Request request) override {
     if (request.GetType() == "2") {
       std::cout << request.GetName() << " is handle by ConcreteHandler2"
@@ -73,6 +73,6 @@ void Client() {
             << "ChainOfResponsibility"
             << "***" << std::endl;
 }
-}; // namespace ChainOfResponsibility
+};  // namespace ChainOfResponsibility
 
-#endif // CHAINOFRESPONSIBILITY_H
+#endif  // CHAINOFRESPONSIBILITY_H
