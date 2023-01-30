@@ -2,6 +2,7 @@
 #ifndef PROTOTYPE_H
 #define PROTOTYPE_H
 
+#include <cassert>
 #include <iostream>
 #include <string>
 
