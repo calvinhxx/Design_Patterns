@@ -9,10 +9,16 @@
 
 ### Changed
 
+- ♻️ Refactor: refactor readme image show [[96ebc91](https://github.com/calvinhxx/Design_Patterns/commit/96ebc911b989a1259bd06f222dd4f650cf59ee3c)]
 - ♻️ Refactor: refactor source code and coding format [[e225f2c](https://github.com/calvinhxx/Design_Patterns/commit/e225f2cfe515bbe169f887bed9985f3e84c90e7f)]
+
+### Fixed
+
+- 🐛 Fix: fix compiling errors [[5ff2e91](https://github.com/calvinhxx/Design_Patterns/commit/5ff2e91ee00964afb30081fadff808c18f241dad)]
 
 ### Miscellaneous
 
+- 📝 Update: update change log [[8dae3ac](https://github.com/calvinhxx/Design_Patterns/commit/8dae3acd8c7691eedfff2cb632b4d311ef880965)]
 - 📝 Update: update Readme [[43f9baf](https://github.com/calvinhxx/Design_Patterns/commit/43f9baf33137850dd218a37d03b224ba5dafba2d)]
 - 🙈 Add: add gitignore file [[c493ded](https://github.com/calvinhxx/Design_Patterns/commit/c493ded8edd2bbfa6d161ba389a6af334721cacb)]
 - 📝 Add: add uml source file [[e132739](https://github.com/calvinhxx/Design_Patterns/commit/e13273982429db1ebb67c9a8855e52b2377fc83c)]
